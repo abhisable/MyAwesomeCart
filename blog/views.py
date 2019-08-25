@@ -3,8 +3,8 @@ from .models import Blogpost
 from django.http import HttpResponse
 # Create your views here.
 def index(request):
-   
-    return render(request, "blog/index.html")
-def blogpost(request):
-
-    return render(request,"blog/blogpost.html")
+    myposts=Blogpost.objects.all()
+    return render(request, "blog/index.html",{'myposts':myposts})
+def blogpost(request,id):
+    post=Blogpost.objects.filter(post_id=id)[0]
+    return render(request,"blog/blogpost.html",{'post':post})
